@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
 import { MantineProvider, ColorSchemeScript, createTheme } from '@mantine/core';
-import { Inter } from 'next/font/google';
+import { Fira_Code } from 'next/font/google';
 import '@mantine/core/styles.css';
 import './globals.css';
 
 import { TodoStoreProvider } from '@/providers/todo-store-provider';
 
-const inter = Inter({ subsets: ['latin'] });
+const fira = Fira_Code({ subsets: ['cyrillic'] });
 
 export const metadata: Metadata = {
   title: 'Todo App',
@@ -32,7 +32,7 @@ export default function RootLayout({
 
         <ColorSchemeScript/>
       </head>
-    <body className={inter.className}>
+    <body className={fira.className}>
       <TodoStoreProvider>
         <MantineProvider theme={theme}>
           {children}

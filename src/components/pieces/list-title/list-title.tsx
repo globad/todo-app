@@ -44,11 +44,10 @@ export const EditableTitle: FC<EditableTitleProps> = ({
           value={title}
           onChange={handleChange}
           onKeyUp={handleKeyUp}
+          classNames={{ root: styles.root__input} }
         />
       ) : (
-        <h2
-          onClick={handleClick}
-        >
+        <h2 onClick={handleClick}>
           {title}
         </h2>
       )}

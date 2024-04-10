@@ -5,7 +5,7 @@ import styles from './home-page.module.scss';
 import {ToDoList} from "@/components/pieces/todo-list/todo-list";
 
 export const HomePage = () => {
-  const { count, addList, list } = useTodoStore(
+  const { addList, list } = useTodoStore(
     (state) => state,
   );
 

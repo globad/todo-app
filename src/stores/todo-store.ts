@@ -13,26 +13,50 @@ export const defaultInitState: TodoState = {
 };
 
 export const initTodoStore = (): TodoState => {
+  if (typeof window !== undefined) {
+    const savedState = window.localStorage.getItem('state');
+    if (savedState) {
+      try {
+        return JSON.parse(savedState);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
+
   return defaultInitState;
 };
+
+const saveStore = (state: TodoState) => {
+  if (typeof window !== undefined) {
+    const savedState = JSON.stringify(state);
+    window.localStorage.setItem('state', savedState);
+  }
+}
 
 export const createTodoStore = (
   initState: TodoState = defaultInitState,
 ) => {
   return createStore<TodoStore>()((set) => ({
     ...initState,
-    addList: () => set((state) => ({
-      ...state,
-      list: [
-        ...state.list,
-        {
-          name: 'Новый список',
-          todos: [{
-            content: '',
-            completed: false,
-          }],
-        }],
-    })),
+    addList: () => set((state) => {
+      const newState = {
+        ...state,
+        list: [
+          ...state.list,
+          {
+            name: 'Новый список',
+            todos: [{
+              content: '',
+              completed: false,
+            }],
+          }
+        ],
+      };
+
+      saveStore(newState);
+      return newState;
+    }),
     updateList: (id: number, newList: ToDoList) => set((state) => {
       const newState = {
         ...state,
@@ -42,15 +66,21 @@ export const createTodoStore = (
         ...newList,
       };
 
+      saveStore(newState);
       return newState;
     }),
     removeList: () => set((state) => ({
       ...state,
       // to be continued...
     })),
-    toggleDraggable: () => set((state) => ({
-      ...state,
-      isDraggable: !state.isDraggable,
-    })),
+    toggleDraggable: () => set((state) => {
+      const newState = {
+        ...state,
+        isDraggable: !state.isDraggable,
+      }
+
+      saveStore(newState);
+      return newState;
+    }),
   }))
 };

@@ -25,7 +25,7 @@ export const EditableTitle: FC<EditableTitleProps> = ({
   const handleKeyUp = (event: KeyboardEvent<HTMLElement>) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      event.currentTarget.blur();
+      setFocused(false);
     }
   };
 
@@ -44,7 +44,10 @@ export const EditableTitle: FC<EditableTitleProps> = ({
           value={title}
           onChange={handleChange}
           onKeyUp={handleKeyUp}
-          classNames={{ root: styles.root__input} }
+          classNames={{
+            root: styles.root__input,
+            wrapper: styles.root__wrapper,
+          }}
         />
       ) : (
         <h2 onClick={handleClick}>

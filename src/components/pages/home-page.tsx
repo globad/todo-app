@@ -6,9 +6,7 @@ import styles from './home-page.module.scss';
 import { ToDoList } from "@/components/pieces/todo-list/todo-list";
 
 export const HomePage = () => {
-  const { addList, list, isDraggable, toggleDraggable } = useTodoStore(
-    (state) => state,
-  );
+  const { addList, list, isDraggable, toggleDraggable } = useTodoStore((state) => state);
 
   const handleChipClick = () => {
     toggleDraggable();

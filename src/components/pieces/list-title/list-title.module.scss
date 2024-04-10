@@ -1,6 +1,7 @@
 @mixin input {
   font-size: 1.5em;
   line-height: 20px;
+  width: 100%;
 }
 
 .root {
@@ -12,8 +13,12 @@
   align-items: center;
 
   &:not(.focused):hover {
-    border: 1px solid #b8b8b8;
+    border: 1px solid #ced4da;
     border-radius: 3px;
+  }
+
+  &__input {
+    width: 100%;
   }
 
   &__input input {

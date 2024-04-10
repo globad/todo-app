@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import Draggable from 'react-draggable';
 import { Button, Card } from '@mantine/core';
 import { ToDo as ToDoType } from '@/stores/store.types';
@@ -15,65 +15,65 @@ interface ToDoProps {
 }
 
 export const ToDoList: FC<ToDoProps> = ({ id: listId, name, todos }) => {
-  const { list, updateList } = useTodoStore((state) => state);
+  const { list, updateList, isDraggable } = useTodoStore((state) => state);
 
-  const handleEditTitle = (value: string | null) => {
-    const newList = {
-      ...list[listId],
-      name: value || '',
-    };
-    updateList(listId, newList);
-  };
-
-  const handleAddNew = () => {
-    if (!hasEmpty(list[listId].todos)) {
+  const content = useMemo(() => {
+    const handleEditTitle = (value: string | null) => {
       const newList = {
         ...list[listId],
-        todos: [
-          ...list[listId].todos,
-          { content: '', completed: false }
-        ],
+        name: value || '',
       };
       updateList(listId, newList);
-    }
-  }
-
-  const handleChangeContent = (todoId: number, content: string) => {
-    const newList = {
-      ...list[listId],
-      todos: [...list[listId].todos],
     };
 
-    if (newList.todos[todoId]) {
-      newList.todos[todoId].content = content;
+    const handleAddNew = () => {
+      if (!hasEmpty(list[listId].todos)) {
+        const newList = {
+          ...list[listId],
+          todos: [
+            ...list[listId].todos,
+            { content: '', completed: false }
+          ],
+        };
+        updateList(listId, newList);
+      }
     }
-    updateList(listId, newList);
-  }
 
-  const handleChangeStatus = (todoId: number, status: boolean) => {
-    const newList = {
-      ...list[listId],
-      todos: [...list[listId].todos],
-    };
-    if (newList.todos[todoId]) {
-      newList.todos[todoId].completed = status;
-    }
-    updateList(listId, newList);
-  }
-
-  const handleDelete = (todoId: number) => {
-    if (todos.length > 1) {
+    const handleChangeContent = (todoId: number, content: string) => {
       const newList = {
         ...list[listId],
         todos: [...list[listId].todos],
       };
-      newList.todos.splice(todoId, 1);
+
+      if (newList.todos[todoId]) {
+        newList.todos[todoId].content = content;
+      }
       updateList(listId, newList);
     }
-  }
 
-  return (
-    <Draggable>
+    const handleChangeStatus = (todoId: number, status: boolean) => {
+      const newList = {
+        ...list[listId],
+        todos: [...list[listId].todos],
+      };
+      if (newList.todos[todoId]) {
+        newList.todos[todoId].completed = status;
+      }
+      updateList(listId, newList);
+    }
+
+    const handleDelete = (todoId: number) => {
+      if (todos.length > 1) {
+        const newList = {
+          ...list[listId],
+          todos: [...list[listId].todos],
+        };
+        newList.todos.splice(todoId, 1);
+        updateList(listId, newList);
+      }
+    }
+    
+    return (
       <Card
         shadow="sm"
         padding="lg"
@@ -105,6 +105,13 @@ export const ToDoList: FC<ToDoProps> = ({ id: listId, name, todos }) => {
           <Button onClick={handleAddNew} variant="default" size="compact-sm">+</Button>
         </div>
       </Card>
+    );
+  }, [list, listId, name, todos, updateList]);
+
+  return isDraggable ? (
+    <Draggable>
+      {content}
     </Draggable>
-  );
+  ) :
+    content;
 };

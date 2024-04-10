@@ -2,7 +2,7 @@ import { createStore } from 'zustand/vanilla';
 import {TodoStore, TodoState, ToDoList } from './store.types';
 
 export const defaultInitState: TodoState = {
-  count: 0,
+  isDraggable: false,
   list: [{
     todos: [{
       content: '',
@@ -47,6 +47,10 @@ export const createTodoStore = (
     removeList: () => set((state) => ({
       ...state,
       // to be continued...
+    })),
+    toggleDraggable: () => set((state) => ({
+      ...state,
+      isDraggable: !state.isDraggable,
     })),
   }))
 };

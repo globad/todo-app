@@ -9,7 +9,7 @@ export type ToDoList = {
 }
 
 export type TodoState = {
-  count: number;
+  isDraggable: boolean;
   list: ToDoList[];
 }
 
@@ -17,6 +17,7 @@ export type Actions = {
   addList: () => void;
   updateList: (id: number, newList: ToDoList) => void;
   removeList: (id: number) => void;
+  toggleDraggable: () => void;
 }
 
 export type TodoStore = TodoState & Actions;

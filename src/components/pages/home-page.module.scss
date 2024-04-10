@@ -13,6 +13,14 @@
   justify-content: space-between;
 }
 
+@mixin shadow {
+  box-shadow: #dedddd 0px 0px 20px 10px;
+
+  &:hover {
+    box-shadow: #dedddd 0px 0px 20px 10px, inset rgba(255, 255, 255, 0.9) 0px 0px 15px 10px;
+  }
+}
+
 .addNewList {
   cursor: pointer;
   outline: none;
@@ -22,11 +30,18 @@
   width: 100px;
   height: 100px;
   position: absolute;
-  bottom: 50px;
-  right: 50px;
+  bottom: 2rem;
+  right: 2rem;
+  @include shadow;
 
   &:hover {
     background: rgb(232, 255, 223);
     border: 1px solid #beffbd;
   }
+}
+
+.chip {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
 }

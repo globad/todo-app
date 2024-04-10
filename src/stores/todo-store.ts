@@ -13,7 +13,7 @@ export const defaultInitState: TodoState = {
 };
 
 export const initTodoStore = (): TodoState => {
-  if (typeof window !== undefined) {
+  if (typeof window !== 'undefined') {
     const savedState = window.localStorage.getItem('state');
     if (savedState) {
       try {
@@ -28,7 +28,7 @@ export const initTodoStore = (): TodoState => {
 };
 
 const saveStore = (state: TodoState) => {
-  if (typeof window !== undefined) {
+  if (typeof window !== 'undefined') {
     const savedState = JSON.stringify(state);
     window.localStorage.setItem('state', savedState);
   }

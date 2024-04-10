@@ -1,0 +1,13 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 40px;
+  min-width: 400px;
+  gap: 10px;
+}
+
+.textInput {
+  width: 100%;
+}

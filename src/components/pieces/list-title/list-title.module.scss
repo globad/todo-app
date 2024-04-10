@@ -1,0 +1,22 @@
+.root {
+  color: #323232;
+  height: 35px;
+  width: 100%;
+
+  &:not(.focused):hover {
+    border: 1px solid #b8b8b8,
+  }
+
+  input {
+    font-size: 1.5em;
+    line-height: 20px;
+  }
+}
+
+.completed {
+  color: rgba(0, 212, 4, 0.96);
+}
+
+.focused {
+
+}

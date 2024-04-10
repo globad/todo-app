@@ -1,0 +1,32 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 2rem;
+  min-height: 100vh;
+  gap: 32px;
+  overflow-x: auto;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.addNewList {
+  cursor: pointer;
+  outline: none;
+  border-radius: 50%;
+  border: 1px solid #b8b8b8;
+  background: rgb(222, 255, 211);
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+
+  &:hover {
+    background: rgb(232, 255, 223);
+    border: 1px solid #beffbd;
+  }
+}

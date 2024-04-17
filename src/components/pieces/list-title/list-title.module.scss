@@ -6,8 +6,8 @@
 
 .root {
   color: #323232;
-  height: 35px;
-  width: 100%;
+  min-height: 35px;
+  width: calc(100% - 38px);
   display: flex;
   justify-content: flex-start;
   align-items: center;

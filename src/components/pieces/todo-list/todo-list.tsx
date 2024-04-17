@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
 import Draggable from 'react-draggable';
-import { Button, Card } from '@mantine/core';
+import { Button, Card, CloseButton } from '@mantine/core';
 import { ToDo as ToDoType } from '@/stores/store.types';
 import { ToDo as ToDoComponent } from '@/components/pieces/todo/todo';
 import { useTodoStore } from "@/providers/todo-store-provider";
@@ -12,9 +12,15 @@ interface ToDoProps {
   id: number;
   name: string;
   todos: ToDoType[];
+  onDelete: (listId: number) => void;
 }
 
-export const ToDoList: FC<ToDoProps> = ({ id: listId, name, todos }) => {
+export const ToDoList: FC<ToDoProps> = ({
+  id: listId,
+  name,
+  todos,
+  onDelete,
+}) => {
   const { list, updateList, isDraggable } = useTodoStore((state) => state);
 
   const content = useMemo(() => {
@@ -72,6 +78,10 @@ export const ToDoList: FC<ToDoProps> = ({ id: listId, name, todos }) => {
         updateList(listId, newList);
       }
     }
+
+    const handleDeleteList = () => {
+      onDelete(listId);
+    };
     
     return (
       <Card
@@ -86,6 +96,7 @@ export const ToDoList: FC<ToDoProps> = ({ id: listId, name, todos }) => {
           isCompleted={isCompleted(todos)}
           onEdit={handleEditTitle}
         />
+        <CloseButton className={styles.deleteListButton} onClick={handleDeleteList} />
         {
           todos && todos.map((item, index) => (
             <ToDoComponent
@@ -108,7 +119,7 @@ export const ToDoList: FC<ToDoProps> = ({ id: listId, name, todos }) => {
         </div>
       </Card>
     );
-  }, [list, listId, name, todos, updateList]);
+  }, [list, listId, name, onDelete, todos, updateList]);
 
   return isDraggable ? (
     <Draggable>

@@ -69,10 +69,15 @@ export const createTodoStore = (
       saveStore(newState);
       return newState;
     }),
-    removeList: () => set((state) => ({
-      ...state,
-      // to be continued...
-    })),
+    removeList: (listId: number) => set((state) => {
+      const newState = {
+        ...state,
+        list: [...state.list],
+      };
+      newState.list.splice(listId, 1);
+      saveStore(newState);
+      return newState;
+    }),
     toggleDraggable: () => set((state) => {
       const newState = {
         ...state,

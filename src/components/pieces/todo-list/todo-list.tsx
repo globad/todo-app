@@ -102,7 +102,9 @@ export const ToDoList: FC<ToDoProps> = ({ id: listId, name, todos }) => {
           ))
         }
         <div className={styles.footer}>
-          <Button onClick={handleAddNew} variant="default" size="compact-sm">+</Button>
+          <Button onClick={handleAddNew} variant="default" size="compact-sm" classNames={{ root: styles.button }}>
+            +
+          </Button>
         </div>
       </Card>
     );

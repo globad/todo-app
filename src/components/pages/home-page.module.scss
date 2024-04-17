@@ -1,4 +1,8 @@
 .main {
+  position: relative;
+}
+
+.list {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -19,42 +23,4 @@
     align-content: start;
     gap: 32px;
   }
-}
-
-.toolbar {
-  display: flex;
-  justify-content: space-between;
-}
-
-@mixin shadow {
-  box-shadow: #dedddd 0px 0px 20px 10px;
-
-  &:hover {
-    box-shadow: #dedddd 0px 0px 20px 10px, inset rgba(255, 255, 255, 0.9) 0px 0px 15px 10px;
-  }
-}
-
-.addNewList {
-  cursor: pointer;
-  outline: none;
-  border-radius: 50%;
-  border: 1px solid #b8b8b8;
-  background: rgb(222, 255, 211);
-  width: 100px;
-  height: 100px;
-  position: absolute;
-  bottom: 2rem;
-  right: 2rem;
-  @include shadow;
-
-  &:hover {
-    background: rgb(232, 255, 223);
-    border: 1px solid #beffbd;
-  }
-}
-
-.chip {
-  position: absolute;
-  right: 2rem;
-  top: 2rem;
 }
